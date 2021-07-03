@@ -30,7 +30,8 @@ export default class Counters extends Component {
 
     handleAdd() {
         let countersObj = Object.assign({}, this.state.counters);
-        let newID = Math.max(...Object.keys(countersObj)) + 1;
+        let newID = Math.max(...Object.keys(countersObj).map(x => +x)) + 1;
+        if (newID === -Infinity) newID = 0;
         countersObj[newID] = (
             <Counter key={Math.random()} id={newID} handleDelete={this.handleDelete.bind(this)} />
         );
